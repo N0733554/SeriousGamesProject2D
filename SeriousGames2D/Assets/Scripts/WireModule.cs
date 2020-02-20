@@ -49,18 +49,20 @@ public class WireModule : Module
                 if (Input.GetMouseButtonUp(0))
                 {
                     canConnect = false;
-                    if (selectedNode)
+                    if (selectedNode && (selectedNode != currentConnecting))
                     {
                         if (isValidConnection(currentConnecting, selectedNode))
                         {
                             print("VALID CONNECTION");
-                            Connect(currentConnecting, selectedNode);
+                            ConnectNodes(currentConnecting, selectedNode);
                         }
                         else
                         {
                             print("INVALID CONNECTION");
+                            currentConnecting.Deselect();
+                            selectedNode.Deselect();
                             DrawnWire.SetActive(false);
-                            Destroy(DrawnWire);
+                            Destroy(DrawnWire);                            
                         }
                     }
                     else
@@ -99,7 +101,7 @@ public class WireModule : Module
         }
     }
 
-    void Connect(WireNode a, WireNode b)
+    void ConnectNodes(WireNode a, WireNode b)
     {
         a.Connect();
         b.Connect();
@@ -171,7 +173,7 @@ public class WireModule : Module
             ConnectedNumbers.Add(Left);
             ConnectedNumbers.Add(Right);
 
-            Debug.Log("Added Connection between " + Left + " and " + Right);
+            //Debug.Log("Added Connection between " + Left + " and " + Right);
         }
     }
 

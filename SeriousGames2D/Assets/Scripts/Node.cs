@@ -11,6 +11,6 @@ public class Node : SelectableObject
 
     protected override void Update()
     {
-        
+        base.Update();
     }
 }

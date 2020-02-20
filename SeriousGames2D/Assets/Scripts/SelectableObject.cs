@@ -37,7 +37,7 @@ public class SelectableObject : MonoBehaviour
     }
 
     void OnMouseExit()
-    {
+    {        
         DeHighlightItem();
     }
 
@@ -45,23 +45,27 @@ public class SelectableObject : MonoBehaviour
     {
         Highlighted = true;
         sRenderer.color = highlightColor;
+        //Debug.Log("Highlighting " + this.name);
     }
 
     protected virtual void DeHighlightItem()
     {
         Highlighted = false;
         sRenderer.color = baseColor;
+        //Debug.Log("DeHighlighting " + this.name);
     }
 
     protected virtual void SelectItem()
     {
         Selected = true;
         Selectable = false;
+        Debug.Log(this.name + " Selected");
     }
 
     protected virtual void DeselectItem()
     {
         Selected = false;
         Selectable = true;
+        Debug.Log(this.name + " Deselected");
     }
 }

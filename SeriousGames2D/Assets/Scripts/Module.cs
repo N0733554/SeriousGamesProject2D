@@ -8,7 +8,7 @@ public class Module : SelectableObject
     protected bool isComplete = false;
 
     Camera cam;
-    Machine machine;
+    Machine machine;    
 
     protected override void Start()
     {

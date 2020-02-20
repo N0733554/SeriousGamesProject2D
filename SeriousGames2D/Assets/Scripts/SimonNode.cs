@@ -5,7 +5,7 @@ using UnityEngine;
 public class SimonNode : Node
 {
     SimonModule module;
-    
+    int index;
     protected override void Start()
     {
         base.Start();
@@ -15,5 +15,26 @@ public class SimonNode : Node
     protected override void Update()
     {
         base.Update();             
-    }    
+    }
+
+    protected override void SelectItem()
+    {
+        //Glow();
+        module.RecieveButtonPress(this);
+    }
+
+    public void Glow()
+    {
+        Debug.Log(this.name + " Glowing");
+    }
+
+    public void setIndex(int i)
+    {
+        index = i;
+    }
+    public int getIndex()
+    {
+        return index;
+    }
+
 }

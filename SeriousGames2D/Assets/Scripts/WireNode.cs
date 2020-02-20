@@ -29,10 +29,27 @@ public class WireNode : Node
         module.selectedNode = null;
     }
 
+    protected override void SelectItem()
+    {
+        base.SelectItem();
+
+
+    }
+
+    protected override void DeselectItem()
+    {
+        base.DeselectItem();
+    }
+
     public void Connect()
     {
         Connected = true;
         Selectable = false;
+    }
+
+    public void Deselect()
+    {
+        DeselectItem();
     }
 
     public void setPartner(WireNode p)
