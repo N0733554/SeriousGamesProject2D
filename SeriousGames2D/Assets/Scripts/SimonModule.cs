@@ -75,7 +75,6 @@ public class SimonModule : Module
 
     void SendSequence()
     {
-        //Debug.Log("Sending Sequence");
         for (int i = 0; i < seqNumber; i++)
         {
             nodeGroup[Sequence[i]].Glow();

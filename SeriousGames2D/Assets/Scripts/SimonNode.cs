@@ -10,6 +10,8 @@ public class SimonNode : Node
     {
         base.Start();
         module = GetComponentInParent<SimonModule>();
+
+        Type = "press";
     }
 
     protected override void Update()

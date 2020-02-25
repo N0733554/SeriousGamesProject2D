@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Node : SelectableObject
 {
+    protected string Type;
+    protected bool isPressed = false;
+
     protected override void Start()
     {
         base.Start();
@@ -12,5 +15,36 @@ public class Node : SelectableObject
     protected override void Update()
     {
         base.Update();
+    }
+
+    protected override void SelectItem()
+    {
+        if(Type == "press")
+        {
+            base.SelectItem();
+        }
+        else if(Type == "toggle")
+        {
+            ToggleSelected();
+        }
+    }
+
+    //protected override void DeselectItem()
+    //{
+    //    Selected = false;
+    //    Selectable = true;
+    //    Debug.Log(this.name + " Deselected");
+    //}
+
+    protected void ToggleSelected()
+    {
+        if (isPressed)
+        {
+            isPressed = false;
+        }
+        else
+        {
+            isPressed = true;
+        }
     }
 }

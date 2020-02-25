@@ -36,7 +36,7 @@ public class SelectableObject : MonoBehaviour
             HighlightItem();
     }
 
-    void OnMouseExit()
+    protected virtual void OnMouseExit()
     {        
         DeHighlightItem();
     }

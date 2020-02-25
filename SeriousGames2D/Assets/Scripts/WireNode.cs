@@ -13,6 +13,7 @@ public class WireNode : Node
         base.Start();
 
         module = GetComponentInParent<WireModule>();
+        Type = "toggle";
     }
 
     protected override void HighlightItem()
