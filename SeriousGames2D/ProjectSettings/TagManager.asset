@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: machine
+    uniqueID: 2339443885
+    locked: 0
+  - name: module
+    uniqueID: 4232815063
+    locked: 0
+  - name: symbols
+    uniqueID: 397773163
+    locked: 0
+  - name: extras
+    uniqueID: 2911139329
+    locked: 0
+  - name: nodes
+    uniqueID: 851732813
+    locked: 0

@@ -10,6 +10,8 @@ public class WireModule : Module
     public WireNode selectedNode;
 
     bool isConnecting = false;
+    int[] Connections;
+    Sprite[] SymbolsToAttach;
     WireNode currentConnecting;
     GameObject DrawnWire;
 
@@ -22,12 +24,18 @@ public class WireModule : Module
 
         nodeGroup = GetComponentsInChildren<WireNode>();
 
-        foreach (WireNode n in nodeGroup)
-        {
-            n.GetComponent<CircleCollider2D>().enabled = false;
-        }
+        GenerateConnections();
 
-        generateConnections();
+        AttachSymbolsToNodes();
+
+        for (int i = 0; i < nodeGroup.Length; i++) 
+        {
+            WireNode n = nodeGroup[i];
+            n.AssignSymbol(SymbolsToAttach[i]);
+            //Debug.Log("symbol to attach: (" + i + ") " + SymbolsToAttach[i]);
+            n.DrawSymbol();
+            n.GetComponent<CircleCollider2D>().enabled = false;
+        }        
     }
 
     protected override void Update()
@@ -127,7 +135,7 @@ public class WireModule : Module
         lr.material = wireMat;
         lr.startWidth = wireWidth;
         lr.endWidth = wireWidth;
-        lr.sortingOrder = 5;
+        lr.sortingLayerName = "extras";
         lr.SetPosition(0, currentConnecting.transform.position);
     }
 
@@ -150,9 +158,10 @@ public class WireModule : Module
         lr.sortingOrder = 3;
     }
 
-    void generateConnections()
+    void GenerateConnections()
     {
         int numberConnections = Random.Range(1, 4);
+        Connections = new int[numberConnections*2];
         List<int> ConnectedNumbers = new List<int>();
 
         for(int i = 0; i < numberConnections; i++)
@@ -173,9 +182,170 @@ public class WireModule : Module
             ConnectedNumbers.Add(Left);
             ConnectedNumbers.Add(Right);
 
+            Connections[2 * i] = Left;
+            Connections[(2 * i) + 1] = Right;
+
             //Debug.Log("Added Connection between " + Left + " and " + Right);
         }
     }
+
+    void AttachSymbolsToNodes()
+    {
+        int numCon = Connections.Length / 2;
+        Debug.Log("connections: " + numCon);
+        Sprite[] allSymbols = new Sprite[6];
+        Sprite[] Pair;
+
+        switch(numCon)
+        {
+            case 1:
+                Pair = chooseSymbolPair(1);
+                allSymbols[Connections[0]-1] = Pair[0];
+                allSymbols[Connections[1]-1] = Pair[1];
+                Pair = chooseRemainingSymbols(4);
+                for (int j = 0; j < 4; j++)
+                {
+                    for (int i = 0; i < 6; i++)
+                    {
+                        if (allSymbols[i] == null)
+                        {
+                            allSymbols[i] = Pair[j];
+                            break;
+                        }
+                    }
+                }
+                break;
+
+            case 2:
+                Pair = chooseSymbolPair(1);
+                Debug.Log(Connections[0]);
+                allSymbols[Connections[0]-1] = Pair[0];
+
+                Debug.Log(Connections[1]);
+                allSymbols[Connections[1]-1] = Pair[1];
+
+                Pair = chooseSymbolPair(2);
+                Debug.Log(Connections[2]);
+                allSymbols[Connections[2]-1] = Pair[0];
+
+                Debug.Log(Connections[3]);
+                allSymbols[Connections[3]-1] = Pair[1];
+
+                Pair = chooseRemainingSymbols(2);
+                for (int j = 0; j < 2; j++)
+                {
+                    for (int i = 0; i < 6; i++)
+                    {
+                        if (allSymbols[i] == null)
+                        {
+                            Debug.Log(Pair[j]);
+                            allSymbols[i] = Pair[j];
+                            break;
+                        }
+                    }
+                }
+                break;
+
+            case 3:
+                Pair = chooseSymbolPair(1);
+                Debug.Log(Connections[0]);
+                allSymbols[Connections[0]-1] = Pair[0];
+                Debug.Log(Connections[1]);
+                allSymbols[Connections[1]-1] = Pair[1];
+                Pair = chooseSymbolPair(2);
+                Debug.Log(Connections[2]);
+                allSymbols[Connections[2]-1] = Pair[0];
+                Debug.Log(Connections[3]);
+                allSymbols[Connections[3]-1] = Pair[1];
+                Pair = chooseSymbolPair(3);
+                Debug.Log(Connections[4]);
+                allSymbols[Connections[4]-1] = Pair[0];
+                Debug.Log(Connections[5]);
+                allSymbols[Connections[5]-1] = Pair[1];
+                break;
+
+            default:
+                Debug.Log("No Connection Generated!");
+                break;
+        }
+        //foreach (Sprite s in allSymbols)
+        //   Debug.Log("SymbolName: " + s.name);
+
+        
+
+        SymbolsToAttach = allSymbols;
+    }
+
+    int[] swap(int[] arr, int x, int y)
+    {
+        int[] newArr = arr;
+        
+        newArr[x] = arr[y];
+        newArr[y] = arr[x];
+
+        return newArr;
+    }
+
+    Sprite[] chooseSymbolPair(int index)
+    {
+        Sprite[] Pair = new Sprite[2];
+        Sprite[] sArray;
+        switch (index)
+        {
+            case 1:
+                sArray = symbolList.wireGroup1;
+                break;
+            case 2:
+                sArray = symbolList.wireGroup2;
+                break;
+            case 3:
+                sArray = symbolList.wireGroup3;
+                break;
+            default:
+                sArray = new Sprite[0];
+                Debug.Log("index -" + index + " not found");
+                break;
+        }
+
+        int a = Random.Range(0, sArray.Length);
+        int b = Random.Range(0, sArray.Length);
+        while (a == b)
+            b = Random.Range(0, sArray.Length);
+
+        Pair[0] = sArray[a];
+        Pair[1] = sArray[b];
+
+        return Pair;
+    }
+
+    Sprite[] chooseRemainingSymbols(int number)
+    {
+        //Debug.Log("number: " + number);
+        Sprite[] symbolSet = new Sprite[number];
+        Sprite[] wireGroupN = symbolList.wireGroupN;
+
+        List<int> numbers = new List< int > (6);
+        for (int i = 0; i < 6; i++)
+        {
+            numbers.Add(i);
+        }
+        int[] randomNumbers = new int[number];
+        for (int i = 0; i < number; i++)
+        {
+            int thisNumber = Random.Range(0, numbers.Count-1);
+            randomNumbers[i] = numbers[thisNumber];
+            numbers.RemoveAt(thisNumber);
+            //Debug.Log(randomNumbers[i] + " at " + i);
+        }
+        for (int i = 0; i < randomNumbers.Length; i++)
+        {
+            //Debug.Log("randomNumbers: " + randomNumbers[i]);
+            //Debug.Log("wireGroupN[i]: " + wireGroupN[randomNumbers[i]]);
+            symbolSet[i] = wireGroupN[randomNumbers[i]];
+        }
+        return symbolSet;
+    }
+
 
     bool connectionsComplete()
     {
@@ -194,6 +364,5 @@ public class WireModule : Module
             return true;
         else
             return false;
-    }
-    
+    }    
 }

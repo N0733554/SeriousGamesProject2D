@@ -10,9 +10,13 @@ public class SelectableObject : MonoBehaviour
     public bool Selected = false;
     [HideInInspector]
     public bool Selectable = true;
+    [HideInInspector]
+    public bool isPressed = false;
 
-    private Color baseColor;
+    protected Color currentColor;
+    protected Color baseColor;
     public Color highlightColor;
+    public Color pressedColor;
 
     private SpriteRenderer sRenderer;
 
@@ -20,6 +24,7 @@ public class SelectableObject : MonoBehaviour
     {
         sRenderer = GetComponent<SpriteRenderer>();
         baseColor = sRenderer.color;
+        currentColor = baseColor;
     }
 
     protected virtual void Update()
@@ -28,6 +33,7 @@ public class SelectableObject : MonoBehaviour
         {
             SelectItem();
         }
+        sRenderer.color = currentColor;
     }
 
     void OnMouseEnter()
@@ -44,14 +50,16 @@ public class SelectableObject : MonoBehaviour
     protected virtual void HighlightItem()
     {
         Highlighted = true;
-        sRenderer.color = highlightColor;
+        if(!isPressed)
+            currentColor = highlightColor;
         //Debug.Log("Highlighting " + this.name);
     }
 
     protected virtual void DeHighlightItem()
     {
         Highlighted = false;
-        sRenderer.color = baseColor;
+        if(!isPressed)
+            currentColor = baseColor;
         //Debug.Log("DeHighlighting " + this.name);
     }
 

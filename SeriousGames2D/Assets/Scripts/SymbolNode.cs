@@ -4,30 +4,40 @@ using UnityEngine;
 
 public class SymbolNode : Node
 {
-    string symbol;
-    public Color pressedColor;
+    int index;
+    SymbolModule module;
 
     protected override void Start()
     {
         base.Start();
+        module = GetComponentInParent<SymbolModule>();
         Type = "toggle";
     }
 
     protected override void Update()
     {
-        base.Update();
-
-        if (isPressed)
-            GetComponent<SpriteRenderer>().color = pressedColor;
-    }
-    
-    public void AssignSymbol(string s)
-    {
-        symbol = s;
+        base.Update();        
     }
 
-    public string getSymbol()
+    protected override void SelectItem()
     {
-        return symbol;
+        module.RecieveButtonPress(index);
+    }
+
+    public void DeselectButton()
+    {
+        isPressed = false;
+        currentColor = baseColor;
+    }
+
+    public void Press()
+    {
+        isPressed = true;
+        currentColor = pressedColor;
+    }
+
+    public void setIndex(int i)
+    {
+        index = i;
     }
 }

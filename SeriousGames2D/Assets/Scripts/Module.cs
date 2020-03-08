@@ -8,12 +8,14 @@ public class Module : SelectableObject
     protected bool isComplete = false;
 
     Camera cam;
-    Machine machine;    
+    Machine machine;
+    protected SymbolList symbolList;
 
     protected override void Start()
     {
         base.Start();
         machine = GetComponentInParent<Machine>();
+        symbolList = machine.GetComponent<SymbolList>();
         cam = machine.getCamera();
     }
 

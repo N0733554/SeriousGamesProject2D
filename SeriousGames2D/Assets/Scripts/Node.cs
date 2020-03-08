@@ -5,7 +5,6 @@ using UnityEngine;
 public class Node : SelectableObject
 {
     protected string Type;
-    protected bool isPressed = false;
 
     protected override void Start()
     {

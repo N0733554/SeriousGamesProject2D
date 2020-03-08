@@ -27,7 +27,7 @@ public class SimonNode : Node
 
     public void Glow()
     {
-        Debug.Log(this.name + " Glowing");
+        //Debug.Log(this.name + " Glowing");
     }
 
     public void setIndex(int i)

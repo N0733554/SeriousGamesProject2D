@@ -149,7 +149,7 @@ public class SimonModule : Module
                     break;
                 }
         }
-        print("State is: " + State);
+        //Debug.Log("State is: " + State);
     }
 
     int ToCorrect(int n)
