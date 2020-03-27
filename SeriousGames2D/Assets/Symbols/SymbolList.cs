@@ -33,8 +33,10 @@ public class SymbolList : MonoBehaviour
     public Sprite[] wireGroup3;
     public Sprite[] wireGroupN;
 
-    public Sprite[] symbolGroup1;
-    public Sprite[] symbolGroup2;
-    public Sprite[] symbolGroup3;
-    public Sprite[] symbolGroup4;
+    public Sprite[] sequenceOrientation;
+    public Sprite[] sequenceGroup1;
+    public Sprite[] sequenceGroup2;
+    public Sprite[] sequenceGroup3;
+    public Sprite[] sequenceGroup4;
+    public Sprite[] sequenceGroup5;
 }
