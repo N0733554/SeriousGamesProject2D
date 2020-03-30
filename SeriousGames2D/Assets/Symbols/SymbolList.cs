@@ -39,4 +39,11 @@ public class SymbolList : MonoBehaviour
     public Sprite[] sequenceGroup3;
     public Sprite[] sequenceGroup4;
     public Sprite[] sequenceGroup5;
+
+    public Sprite[] orderGroup1;
+    public Sprite[] orderGroup2;
+    public Sprite[] orderGroup3;
+    public Sprite[] orderGroup4;
+    public Sprite[] orderGroup5;
+
 }
