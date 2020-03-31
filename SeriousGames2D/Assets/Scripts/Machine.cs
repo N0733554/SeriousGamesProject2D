@@ -27,4 +27,15 @@ public class Machine : MonoBehaviour
             m.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
+
+    public bool isComplete()
+    {
+        foreach(Module m in moduleList)
+        {
+            if (!m.isComplete)
+                return false;
+        }
+        FindObjectOfType<GameManager>().EndGame(true);
+        return true;
+    }
 }

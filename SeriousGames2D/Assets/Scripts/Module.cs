@@ -5,7 +5,8 @@ using UnityEngine;
 public class Module : SelectableObject
 {
     protected bool isEscapable = false;
-    protected bool isComplete = false;
+    [HideInInspector]
+    public bool isComplete = false;
 
     Camera cam;
     Machine machine;
