@@ -6,7 +6,6 @@ public class SequenceModule : Module
 {
     SequenceNode[] nodeGroup;
 
-    string State = "startState";
     int StateNumber = 0;
     public int sequenceLength = 5;
     int[] Sequence;
@@ -32,7 +31,7 @@ public class SequenceModule : Module
     protected override void Start()
     {
         base.Start();
-
+        isComplete = false;
         nodeGroup = GetComponentsInChildren<SequenceNode>();
 
         ChooseSymbolSet();
@@ -108,7 +107,7 @@ public class SequenceModule : Module
 
         if(press == Sequence[countNumber]) // If the button pressed is the correct one
         {
-            Debug.Log("CORRECT!");
+            //Debug.Log("CORRECT!");
             // Increase number of whic the button should be pressed
             countNumber++;
             // Check if the Module has been completed and if it hasnt then move onto the next number in the sequence
@@ -117,7 +116,8 @@ public class SequenceModule : Module
 
         else
         {
-            Debug.Log("INCORRECT!");
+            //Debug.Log("INCORRECT!");
+            FindObjectOfType<GameManager>().Strike();
             resetSequence();
         }
     }
@@ -127,11 +127,12 @@ public class SequenceModule : Module
         if(seqNumber == sequenceLength && countNumber == seqNumber)
         {
             CompleteModule();
+            machine.isMachineComplete();
         }
 
         if(countNumber == seqNumber)
         {
-            Debug.Log("Sequence Complete!");
+            //Debug.Log("Sequence Complete!");
             seqNumber++;
             countNumber = 0;
         }

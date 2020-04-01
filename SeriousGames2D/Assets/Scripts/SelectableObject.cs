@@ -67,13 +67,13 @@ public class SelectableObject : MonoBehaviour
     {
         Selected = true;
         Selectable = false;
-        Debug.Log(this.name + " Selected");
+        //Debug.Log(this.name + " Selected");
     }
 
     protected virtual void DeselectItem()
     {
         Selected = false;
         Selectable = true;
-        Debug.Log(this.name + " Deselected");
+        //Debug.Log(this.name + " Deselected");
     }
 }

@@ -9,7 +9,7 @@ public class Module : SelectableObject
     public bool isComplete = false;
 
     Camera cam;
-    Machine machine;
+    protected Machine machine;
     protected SymbolList symbolList;
 
     protected override void Start()
@@ -58,7 +58,7 @@ public class Module : SelectableObject
 
     protected void CompleteModule()
     {
-        Debug.Log("COMPLETE");
+        Debug.Log(this.name + " COMPLETE");
         isComplete = true;
         DeselectItem();
         Selectable = false;

@@ -28,12 +28,15 @@ public class Machine : MonoBehaviour
         }
     }
 
-    public bool isComplete()
+    public bool isMachineComplete()
     {
         foreach(Module m in moduleList)
         {
             if (!m.isComplete)
+            {
+                Debug.Log(m.name + " is not complete");
                 return false;
+            }
         }
         FindObjectOfType<GameManager>().EndGame(true);
         return true;

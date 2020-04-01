@@ -21,7 +21,7 @@ public class WireModule : Module
     protected override void Start()
     {
         base.Start();
-
+        isComplete = false;
         nodeGroup = GetComponentsInChildren<WireNode>();
 
         GenerateConnections();
@@ -48,7 +48,10 @@ public class WireModule : Module
         {
 
             if (connectionsComplete())
+            {
                 CompleteModule();
+                machine.isMachineComplete();
+            }
 
             if (isConnecting)
             {
@@ -67,6 +70,7 @@ public class WireModule : Module
                         else
                         {
                             print("INVALID CONNECTION");
+                            FindObjectOfType<GameManager>().Strike();
                             currentConnecting.Deselect();
                             selectedNode.Deselect();
                             DrawnWire.SetActive(false);

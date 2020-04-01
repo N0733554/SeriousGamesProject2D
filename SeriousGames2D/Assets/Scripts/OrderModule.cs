@@ -14,7 +14,7 @@ public class OrderModule : Module
     protected override void Start()
     {
         base.Start();
-
+        isComplete = false;
         nodeGroup = GetComponentsInChildren<OrderNode>();
 
         GenerateOrder();
@@ -37,7 +37,7 @@ public class OrderModule : Module
 
     public void RecieveButtonPress(int press)
     {
-        if(press == buttonOrder[currentPlace])
+        if(press == buttonOrder[currentPlace]) // Correct Button Press
         {
             nodeGroup[press].Press();
             currentPlace++;
@@ -45,6 +45,7 @@ public class OrderModule : Module
         }
         else
         {
+            FindObjectOfType<GameManager>().Strike();
             resetSequence();
         }
     }
@@ -65,6 +66,7 @@ public class OrderModule : Module
         if(currentPlace >= 4)
         {
             CompleteModule();
+            machine.isMachineComplete();
             resetSequence();
         }
     }
