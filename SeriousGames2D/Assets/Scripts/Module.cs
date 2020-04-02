@@ -59,6 +59,13 @@ public class Module : SelectableObject
     protected void CompleteModule()
     {
         Debug.Log(this.name + " COMPLETE");
+
+        AudioSource sound = GetComponent<AudioSource>();
+        if (sound != null)
+            sound.Play();
+
+        currentColor = pressedColor;
+
         isComplete = true;
         DeselectItem();
         Selectable = false;

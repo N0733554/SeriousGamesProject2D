@@ -126,5 +126,5 @@ MonoBehaviour:
   Selectable: 1
   isPressed: 0
   highlightColor: {r: 0.23137257, g: 0.5411765, b: 0.5647059, a: 1}
-  pressedColor: {r: 0, g: 0, b: 0, a: 0}
+  pressedColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
   isComplete: 0

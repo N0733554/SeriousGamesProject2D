@@ -30,7 +30,7 @@ public class Machine : MonoBehaviour
 
     public bool isMachineComplete()
     {
-        foreach(Module m in moduleList)
+        foreach (Module m in moduleList)
         {
             if (!m.isComplete)
             {
