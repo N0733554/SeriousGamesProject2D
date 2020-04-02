@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject levelComplete;
     public TextMeshProUGUI StrikeText;
     public TextMeshProUGUI OutcomeText;
+    public AudioSource musicPlayer;
 
     float finalTime = 0;
     int strikeCount = 0;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
                 OutcomeText.fontSize = 37.5f;
                 OutcomeText.color = new Color(154, 78, 82);
             }
+            musicPlayer.Stop();
         }
     }
 
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour
         StrikeText.text = StrikeText.text + "X   ";
 
         StartCoroutine(FindObjectOfType<Camera>().GetComponent<CameraScript>().Shake(0.15f, 0.2f));
+        GetComponent<AudioSource>().Play();
 
         // check if over strike limit
         if (strikeCount >= 3)
@@ -55,12 +58,16 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(1);
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ExitGame()
     {
         SceneManager.LoadScene(0);
+    }  
+    
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 }

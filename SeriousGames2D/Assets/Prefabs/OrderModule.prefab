@@ -521,7 +521,7 @@ GameObject:
   - component: {fileID: 5737935322847373798}
   - component: {fileID: 5737935322847373799}
   m_Layer: 0
-  m_Name: Module (3)
+  m_Name: OrderModule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -585,7 +585,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 5bfa81a58fc72df41b64f13d962578b8, type: 3}
-  m_Color: {r: 0.4669811, g: 0.95916337, b: 1, a: 1}
+  m_Color: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -611,8 +611,8 @@ MonoBehaviour:
   Selected: 0
   Selectable: 1
   isPressed: 0
-  highlightColor: {r: 0.23137257, g: 0.5411765, b: 0.5647059, a: 1}
-  pressedColor: {r: 0.23137257, g: 0.5411765, b: 0.5647059, a: 1}
+  highlightColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
+  pressedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
   isComplete: 0
 --- !u!61 &5737935322847373799
 BoxCollider2D:
